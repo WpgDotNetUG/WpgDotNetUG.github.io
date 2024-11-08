@@ -1,160 +1,80 @@
 ---
+layout: layouts/base
 eleventyImport:
     collections: ["events"]
 ---
-<html>
-    <head>
-        <title>Full Stack MB</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" type="text/css">
-        <link rel="stylesheet" href="/styles/style.css">
-        <link rel="stylesheet" href="/styles/pnotify.custom.min.css" type="text/css">
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="/scripts/moment.min.js"></script>
-    </head>
-    <body class="container">
-        <header class="site-header site-content">
-            <nav class="nav-social">
-                <ul class="social-icons">
-                    <a title="Join us on Slack." class="sm-link" href="/slack">
-                        <span class="fa-stack fa-2x">
-                            <i class="fa fa-circle fa-stack-2x color-slack" aria-hideen="true"></i>
-                            <i class="fa fa-stack-1x fa-slack"></i>
-                        </span>
-                        Join
-                        </a>
-                        <a title="Come to an event" class="sm-link" href="https://www.meetup.com/fullstackmb/" target="_blank">
-                        <span class="fa-stack fa-2x">
-                            <i class="fa fa-circle fa-stack-2x color-meetup"></i>
-                            <i class="fa fa-stack-1x fa-meetup"></i>
-                        </span>RSVP
-                        </a>
-                        <a title="Follow us on LinkedIn." class="sm-link" href="https://www.linkedin.com/company/fullstackmb/" target="_blank">
-                        <span class="fa-stack fa-2x">
-                            <i class="fa fa-circle fa-stack-2x color-linkedin"></i>
-                            <i class="fa fa-stack-1x fa-linkedin"></i>
-                        </span>Follow
-                        </a>
-                        <a title="Sign up for our newsletter." class="sm-link" href="http://eepurl.com/clTOr" target="_blank">
-                        <span class="fa-stack fa-2x">
-                            <i class="fa fa-circle fa-stack-2x color-newsletter"></i>
-                            <i class="fa fa-stack-1x fa-newspaper-o"></i>
-                        </span>Sign Up
-                        </a>
-                        <!--
-                        <a title="Follow us on Twitter." class="sm-link" href="https://twitter.com/wpgnetug" target="_blank">
-                        <span class="fa-stack fa-2x">
-                            <i class="fa fa-circle fa-stack-2x color-twitter"></i>
-                            <i class="fa fa-stack-1x fa-twitter"></i>
-                        </span>Follow
-                        </a>
-                        -->
-                        <!--
-                        <a title="Like us on Facebook" class="sm-link" href="https://www.facebook.com/winnipegdotnet" target="_blank">
-                        <span class="fa-stack fa-2x">
-                            <i class="fa fa-circle fa-stack-2x color-facebook"></i>
-                        <i class="fa fa-stack-1x fa-facebook"></i></span>Like
-                        </a>
-                        -->
-                        <a title="Subscribe to our YouTube channel to get notifications" class="sm-link" href="https://www.youtube.com/channel/UC6OzdI6-htXE_97zamJRaaA" target="_blank">
-                        <span class="fa-stack fa-2x">
-                            <i class="fa fa-circle fa-stack-2x color-youtube"></i>
-                            <i class="fa fa-stack-1x fa-youtube-play"></i></span>Subscribe
-                        </a>
-                        <a title="Fork us on GitHub and collaborate" class="sm-link" href="https://github.com/WpgDotNetUG/WpgDotNetUG.github.io" target="_blank">
-                        <span class="fa-stack fa-2x">
-                            <i class="fa fa-circle fa-stack-2x color-github"></i>
-                            <i class="fa fa-stack-1x fa-github"></i></span>Fork
-                        </a>
-                </ul>
-            </nav>
-            <div class="logo-menu">
-                <img src="/images/logo.png">
-                <section class="motto">
-                    <header>Full Stack MB</header>
-                    <div class="description">A dynamic group of serverless go getters who see sharp in the folds of lambdas, microservices, and rainbows! Sandwich!</div>
-                </section>
-            </div>
-        </header>
-        <main>
-            <section class="next-event"><a id="next-event"></a>
-                <header class="header">Next Event</header>
-                    {% if events.length > 0 %}
-                    <article class="content site-content">
-                        <article class="event-img">
-                            <img src="{{ events[0].logo }}" >
-                        </article>
-                        <article class="event-info">
-                            <div class="title">{{ events[0].title }}</div>
-                            <article class="description">
-                                <span>{{ events[0].description }}</span>
-                            </article>
-                            <article class="details">
-                                <div class="date">
-                                    <div class="icon"><i class="fa fa-calendar"></i></div>
-                                    <span class="date">{{ events[0].date | date_to_string }}</span>
-                                </div>
-                                <div class="venue">
-                                    <div class="icon"><i class="fa fa-map-marker"></i></div>
-                                    <div class="name">{{ events[0].venue.name}}</div>
-                                    <div class="address">({{ events[0].venue.address }})</div>
-                                </div>
-                            </article>
-                            <article class="call-to-action"><a target="_blank" class="button -large"
-                                href="{{ events[0].link }}">Count me in!</a></article>
-                        </article>
-                    </article>
-                    {% else %}
-                        <article>There are no events currently planned.</article>
-                    {% endif %}
+<section class="next-event"><a id="next-event"></a>
+    <header class="header">Next Event</header>
+        {% if events.length > 0 %}
+        <article class="content site-content">
+            <article class="event-img">
+                <img src="{{ events[0].logo }}" >
+            </article>
+            <article class="event-info">
+                <div class="title">{{ events[0].title }}</div>
+                <article class="description">
+                    <span>{{ events[0].description }}</span>
                 </article>
-                </>
-            </section>
-            {% if events.length > 0 %}
-            <section class="upcoming-events"><a id="upcoming-events"></a>
-                <header>Upcoming Events</header>
-                <ul class="items site-content">
-                    {%- for item in events offset: 1 -%}
-                        <li class="upcoming-event">
-                            <div class="image"><img src="{{ item.logo }}" alt="logo for upcoming event"></div>
-                            <div class="info">
-                                <div class="title">{{ item.title }}</div>
-                                <div class="date">{{ item.date | date_to_string }}</div>
-                                <div class="view"><a target="_blank" class="button -outline"
-                                   href="{{ item.link }}">View</a></div>
-                            </div>
-                        </li>
-                    {%- else -%}
-                        <li>There are no upcoming events.<li>
-                    {%- endfor -%}
-                </ul>
-                <footer></footer>
-            </section>
-            {% endif %}
-            <section class="sponsors section"><a id="sponsors"></a>
-                <header>Sponsors</header>
-                <article class="site-content">
-                    <p>Special thanks to the <a href="https://dotnetfoundation.org" target="_blank">.NET Foundation</a> for helping keep Full Stack Manitoba connected through meetup.com and with other user groups from across North America.</p>
-                </article>
-            </section>
-            <section class="contact-us section"><a id="contact-us"></a>
-                <header>Contact Us</header>
-                <article class="site-content">
-                    <div class="message">Looking to reach out directly to the Full Stack MB leadership? You can find us on <a href="https://www.linkedin.com/company/fullstackmb/" target="_blank">LinkedIn</a>, get an invite to our <a href="/slack">Slack</a>, or message us through <a href="https://www.meetup.com/fullstackmb/" target="_blank">Meetup</a> and someone will get back to you as soon as possible.</div>
-                    <div class="members">
-                    <div class="member" v-for="item in board" v:bind:title="item.name">
-                        <div class="avatar"><img v-bind:src="item.imgUrl" v-bind:alt="item.name"></div>
-                        <div class="name">{{ item.name }}</div>
-                        <div class="role">{{ item.role }}</div>
-                        <div class="contact"><a class="button -outline -small"
-                                                v-bind:href="item.contact | mailTo">{{ item.contact }}</a></div>
+                <article class="details">
+                    <div class="date">
+                        <div class="icon"><i class="fa fa-calendar"></i></div>
+                        <span class="date">{{ events[0].date | date_to_string }}</span>
                     </div>
+                    <div class="venue">
+                        <div class="icon"><i class="fa fa-map-marker"></i></div>
+                        <div class="name">{{ events[0].venue.name}}</div>
+                        <div class="address">({{ events[0].venue.address }})</div>
                     </div>
                 </article>
-            </main>
-            {% include "footer.liquid" %}
-        </body>
-    </html>
+                <article class="call-to-action"><a target="_blank" class="button -large"
+                    href="{{ events[0].link }}">Count me in!</a></article>
+            </article>
+        </article>
+        {% else %}
+            <article>There are no events currently planned.</article>
+        {% endif %}
+    </article>
+    </>
+</section>
+{% if events.length > 0 %}
+<section class="upcoming-events"><a id="upcoming-events"></a>
+    <header>Upcoming Events</header>
+    <ul class="items site-content">
+        {%- for item in events offset: 1 -%}
+            <li class="upcoming-event">
+                <div class="image"><img src="{{ item.logo }}" alt="logo for upcoming event"></div>
+                <div class="info">
+                    <div class="title">{{ item.title }}</div>
+                    <div class="date">{{ item.date | date_to_string }}</div>
+                    <div class="view"><a target="_blank" class="button -outline"
+                        href="{{ item.link }}">View</a></div>
+                </div>
+            </li>
+        {%- else -%}
+            <li>There are no upcoming events.<li>
+        {%- endfor -%}
+    </ul>
+    <footer></footer>
+</section>
+{% endif %}
+<section class="sponsors section"><a id="sponsors"></a>
+    <header>Sponsors</header>
+    <article class="site-content">
+        <p>Special thanks to the <a href="https://dotnetfoundation.org" target="_blank">.NET Foundation</a> for helping keep Full Stack Manitoba connected through meetup.com and with other user groups from across North America.</p>
+    </article>
+</section>
+<section class="contact-us section"><a id="contact-us"></a>
+    <header>Contact Us</header>
+    <article class="site-content">
+        <div class="message">Looking to reach out directly to the Full Stack MB leadership? You can find us on <a href="https://www.linkedin.com/company/fullstackmb/" target="_blank">LinkedIn</a>, get an invite to our <a href="/slack">Slack</a>, or message us through <a href="https://www.meetup.com/fullstackmb/" target="_blank">Meetup</a> and someone will get back to you as soon as possible.</div>
+        <div class="members">
+        <div class="member" v-for="item in board" v:bind:title="item.name">
+            <div class="avatar"><img v-bind:src="item.imgUrl" v-bind:alt="item.name"></div>
+            <div class="name">{{ item.name }}</div>
+            <div class="role">{{ item.role }}</div>
+            <div class="contact"><a class="button -outline -small"
+                                    v-bind:href="item.contact | mailTo">{{ item.contact }}</a></div>
+        </div>
+        </div>
+    </article>
+            

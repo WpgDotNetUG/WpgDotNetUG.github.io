@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% if title %}{{ title }} - {% endif %}Full Stack MB</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" type="text/css">
+        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="/styles/pnotify.custom.min.css" type="text/css">
+    </head>
+    <body class="container">
+        {% include "header.liquid" %}
+        
+        <main>
+            {{ content }}
+        </main>
+
+        {% include "footer.liquid" %}
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/pnotify.custom.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/scripts/moment.min.js"></script>
+        <script src="/scripts/slack.js"></script> 
+    </body>
+</html>

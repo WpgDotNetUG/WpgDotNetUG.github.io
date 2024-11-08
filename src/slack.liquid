@@ -1,88 +1,40 @@
-<html>
-    <head>
-        <title>Full Stack MB</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" type="text/css">
-        <link rel="stylesheet" href="/styles/pnotify.custom.min.css">
-        <link rel="stylesheet" href="/styles/style.old.css">
-
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-        <script src="/scripts/pnotify.custom.min.js"></script>
-    </head>
-    <body>
+---
+layout: layouts/base
+---
+<section class="slack">
+    <header class="header">Join our Slack Community</header>
+    <article class="content site-content">
         <div class="container" id="app">
-            <div class="slack-form">
-                <div class="grid-two-50">
-                    <div>
-                        <a href="index.html">
-                            <img src="/images/logo.png" alt='full stack manitoba logo'>
-                        </a>
-                    </div>
-                    <div class><i class="fa fa-5x fa-slack"></i></div>
+            <div class="slack-content">
+                <div class="slack-icon">
+                    <i class="fa fa-5x fa-slack"></i>
                 </div>
-                <h2>Join the conversation!</h2>
-                <article>
-                    Get an invite to our Slack group by entering your email in the textbox below and clicking "signup". 
+                
+                <article class="slack-message">
+                    <p>Get an invite to our Slack group by entering your email below.</p>
                 </article>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" v-model="email" id="email" class="form-control" placeholder="you@domain.com">
-                </div>
-                <div class="form-group">
-                    <button @click="signUp" type="button" class="button -large">Sign Up</button>
-                </div>
+
+                <form class="slack-signup-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" 
+                               id="email" 
+                               class="form-control" 
+                               placeholder="you@domain.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <button id="signUpButton" 
+                                type="button" 
+                                class="button button-primary"
+                            >
+                            Join Community
+                        </button>
+                    </div>
+                </form>
             </div>
+           
         </div>
-        <script>
-        var app = new Vue({
-            el: "#app",
-            data: function () { 
-                return {
-                    email: ""
-                }
-            },
-            methods: {
-                signUp: () => {
-                    if (app.email && app.email.includes('@')) {
-                        const config = {
-                            headers: {
-                                'Content-Type': 'text/json'
-                            }
-                        };
-                        axios.post("https://fullstackmbapi.azurewebsites.net/api/slack",
-                            JSON.stringify({"email": app.email}), config)
-                            .then(response => {
-                                if (response.data.ok) {
-                                    new PNotify({type: 'success',
-                                        text: "You should receive an email to the address '"+app.email+"' below shortly!" });
-                                    app.email = '';
-                                }
-                                else {
-                                    new PNotify({type: 'warning', text: response.data.error})
-                                }
-                                console.log(response.data);
-                            })
-                            .catch(error => {console.error(error);new PNotify({type: "error", text: error})});
-                    }
-                    else {
-                    new PNotify({text: 'Plese enter a valid email.'}) 
-                    }
-
-                }
-            },
-            computed: {
-                disableSignUp: function () {
-                    return this.email && this.email.includes('@')
-                        ? ""
-                        : "disabled";
-
-                }
-            }
-        });
-        </script>
-    </body>
-</html>
+    </article>
+    <link rel="stylesheet" href="/styles/slack.css">
+</section>
